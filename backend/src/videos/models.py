@@ -1,0 +1,24 @@
+from django.db import models
+from django.db.models.signals import pre_save
+
+from .utils import unique_slug_generator
+
+class Video(models.Model):
+    name= models.CharField(max_length=200)
+    slug = models.SlugField(unique=True, blank=True)
+    embed= models.CharField(max_length=200, help_text="Youtube embed code",null=True, blank=True)
+    featured= models.BooleanField(default=False)
+    timestop = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+    @property
+    def title(self):
+        return self.name
+
+def video_pre_save_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = unique_slug_generator(instance)
+
+pre_save.connect(video_pre_save_receiver, sender= Video)

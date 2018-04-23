@@ -63,20 +63,20 @@
      "name": "Item 10",
      "slug": "item-10",
      "embed": "1hyjLD7pk10",
-     "image": "assets/images/nature/4.jpg",
+     "image": "/static/ang/assets/images/nature/4.jpg",
      "featured": true
     },
     {
      "name": "Item 11",
      "slug": "item-11",
      "embed": "1hyjLD7pk10",
-     "image": "assets/images/nature/5.jpg",
+     "image": "/static/ang/assets/images/nature/5.jpg",
      "featured": true
     },
     {
      "name": "Item 12",
      "slug": "item-12",
      "embed": null,
-     "image": "assets/images/nature/6.jpg"
+     "image": "/static/ang/assets/images/nature/6.jpg"
     }
 ]
