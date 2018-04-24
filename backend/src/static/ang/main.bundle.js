@@ -517,6 +517,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+// C:\Users\Arthur\Desktop\djangular\backend\src\static\ang
 // const endpoint = '/static/ang/assets/json/videos.json'
 var endpoint = "/api/videos/";
 var VideoService = (function () {
@@ -529,19 +530,22 @@ var VideoService = (function () {
             .catch(this.handleError);
     };
     VideoService.prototype.get = function (slug) {
-        return this.http.get(endpoint)
-            .map(function (response) {
-            var data = response.json().filter(function (item) {
-                if (item.slug == slug) {
-                    return item;
-                }
-            });
-            if (data.length == 1) {
-                return data[0];
-            }
-            return {};
-        })
+        return this.http.get(endpoint + slug + "/")
+            .map(function (response) { return response.json(); })
             .catch(this.handleError);
+        // return this.http.get(endpoint)
+        //         .map(response=>{
+        //                let data = response.json().filter(item=>{
+        //                                 if (item.slug == slug) {
+        //                                     return item
+        //                                 }
+        //                             })
+        //                if (data.length == 1){
+        //                    return data[0]
+        //                }
+        //                return {}
+        //          })
+        //         .catch(this.handleError)
     };
     VideoService.prototype.search = function (query) {
         return this.http.get(endpoint)
