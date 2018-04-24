@@ -517,7 +517,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var endpoint = '/static/ang/assets/json/videos.json'; // http://www.yourdomain.com/api/videos/
+// const endpoint = '/static/ang/assets/json/videos.json'
+var endpoint = "/api/videos/";
 var VideoService = (function () {
     function VideoService(http) {
         this.http = http;
@@ -598,13 +599,13 @@ var HomeComponent = (function () {
         this.router = router;
         this._video = _video;
         this.homeImageList = [];
-        this.videoListDefaultImage = 'assets/images/videos/1.jpg';
+        this.videoListDefaultImage = '/static/ang/assets/images/videos/1.jpg';
     }
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.req = this._video.list().subscribe(function (data) {
             //console.log(data.json())
-            //this.homeImageList 
+            //this.homeImageList
             data.filter(function (item) {
                 if (item.featured) {
                     var dataItem = item;

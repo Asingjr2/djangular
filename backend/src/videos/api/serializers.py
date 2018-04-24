@@ -4,8 +4,12 @@ from videos.models import Video
 
 
 class VideoSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
     class Meta:
         model = Video
-        fields = ["name", "slug", "embed", "featured",]
+        fields = ["name", "slug", "embed", "featured", "image", "title"]
 
+    # Adding specific field to use with serializer save method
+    def get_image(self, obj):
+        return "/static/ang/assets/images/nature/4.jpg"
         

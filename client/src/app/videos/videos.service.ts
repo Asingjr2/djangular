@@ -4,8 +4,9 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-
-const endpoint = '/static/ang/assets/json/videos.json' // http://www.yourdomain.com/api/videos/
+// C:\Users\Arthur\Desktop\djangular\backend\src\static\ang
+// const endpoint = '/static/ang/assets/json/videos.json'
+const endpoint = "/api/videos/"
 
 @Injectable()
 export class VideoService {

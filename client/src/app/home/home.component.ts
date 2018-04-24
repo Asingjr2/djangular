@@ -17,13 +17,13 @@ import { VideoService } from '../videos/videos.service';
 export class HomeComponent implements OnInit, OnDestroy {
     private req: any;
    homeImageList:[VideoItem] = [] as [VideoItem]
-   videoListDefaultImage = 'assets/images/videos/1.jpg'
+   videoListDefaultImage = '/static/ang/assets/images/videos/1.jpg'
   constructor(private http:Http, private router:Router, private _video:VideoService) { }
 
   ngOnInit() {
       this.req = this._video.list().subscribe(data=>{
           //console.log(data.json())
-          //this.homeImageList 
+          //this.homeImageList
           data.filter(item=>{
               if(item.featured){
                 let dataItem = item
@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           //image.link = '/videos'
           //image.prevented = true;
           this.router.navigate(['./videos'])
-          
+
       }
   }
 
