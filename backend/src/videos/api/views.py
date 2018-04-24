@@ -12,3 +12,13 @@ class VideoList(generics.ListAPIView):
     serializer_class = VideoSerializer 
     permission_classes = []
     authentication_classes = []
+
+
+class VideoDetail(generics.RetrieveAPIView):
+    queryset = Video.objects.all()
+    serializer_class = VideoSerializer 
+    lookup_field = "slug"
+    permission_classes = []
+    authentication_classes = []
+
+
