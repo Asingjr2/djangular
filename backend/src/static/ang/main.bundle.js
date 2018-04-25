@@ -559,6 +559,12 @@ var VideoService = (function () {
     };
     VideoService.prototype.handleError = function (error, caught) {
         console.log(error, caught);
+        if (error.status == 404) {
+            alert("Video Page not found");
+        }
+        else {
+            alert("Something went wrong");
+        }
     };
     return VideoService;
 }());
@@ -666,8 +672,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var SearchDetailComponent = (function () {
-    function SearchDetailComponent(route, _video) {
+    function SearchDetailComponent(route, router, _video) {
         this.route = route;
+        this.router = router;
         this._video = _video;
     }
     SearchDetailComponent.prototype.ngOnInit = function () {
@@ -676,6 +683,9 @@ var SearchDetailComponent = (function () {
             _this.query = params['q'];
             _this.req = _this._video.search(_this.query).subscribe(function (data) {
                 _this.videoList = data;
+            }, function (error) {
+                console.log(error);
+                _this.router.navigate(['/videos']);
             });
         });
     };
@@ -695,10 +705,10 @@ SearchDetailComponent = __decorate([
         styles: [__webpack_require__(179)],
         providers: [__WEBPACK_IMPORTED_MODULE_2__videos_videos_service__["a" /* VideoService */]]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__videos_videos_service__["a" /* VideoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__videos_videos_service__["a" /* VideoService */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__videos_videos_service__["a" /* VideoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__videos_videos_service__["a" /* VideoService */]) === "function" && _c || Object])
 ], SearchDetailComponent);
 
-var _a, _b;
+var _a, _b, _c;
 //# sourceMappingURL=search-detail.component.js.map
 
 /***/ }),
@@ -724,16 +734,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var VideoDetailComponent = (function () {
-    function VideoDetailComponent(route, _video) {
+    function VideoDetailComponent(route, router, _video) {
         this.route = route;
+        this.router = router;
         this._video = _video;
     }
+    // Creating error message as well as instrucion to redirect
     VideoDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.routeSub = this.route.params.subscribe(function (params) {
             _this.slug = params['slug'];
             _this.req = _this._video.get(_this.slug).subscribe(function (data) {
                 _this.video = data;
+            }, function (error) {
+                console.log(error);
+                _this.router.navigate(['/videos']);
             });
         });
     };
@@ -753,10 +768,10 @@ VideoDetailComponent = __decorate([
         styles: [__webpack_require__(181)],
         providers: [__WEBPACK_IMPORTED_MODULE_2__videos_videos_service__["a" /* VideoService */]]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__videos_videos_service__["a" /* VideoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__videos_videos_service__["a" /* VideoService */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__videos_videos_service__["a" /* VideoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__videos_videos_service__["a" /* VideoService */]) === "function" && _c || Object])
 ], VideoDetailComponent);
 
-var _a, _b;
+var _a, _b, _c;
 //# sourceMappingURL=video-detail.component.js.map
 
 /***/ }),
