@@ -3,6 +3,7 @@ from django.db.models.signals import pre_save
 
 from .utils import unique_slug_generator
 
+
 class Video(models.Model):
     name= models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True)

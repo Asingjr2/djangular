@@ -524,8 +524,14 @@ var VideoService = (function () {
     function VideoService(http) {
         this.http = http;
     }
+    // **** below functions define url behavior...basic list then slug then filter
     VideoService.prototype.list = function () {
         return this.http.get(endpoint)
+            .map(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    VideoService.prototype.featured = function () {
+        return this.http.get(endpoint + "featured/")
             .map(function (response) { return response.json(); })
             .catch(this.handleError);
     };
@@ -533,32 +539,23 @@ var VideoService = (function () {
         return this.http.get(endpoint + slug + "/")
             .map(function (response) { return response.json(); })
             .catch(this.handleError);
-        // return this.http.get(endpoint)
-        //         .map(response=>{
-        //                let data = response.json().filter(item=>{
-        //                                 if (item.slug == slug) {
-        //                                     return item
-        //                                 }
-        //                             })
-        //                if (data.length == 1){
-        //                    return data[0]
-        //                }
-        //                return {}
-        //          })
-        //         .catch(this.handleError)
     };
     VideoService.prototype.search = function (query) {
-        return this.http.get(endpoint)
-            .map(function (response) {
-            var data = [];
-            var req = response.json().filter(function (item) {
-                if (item.name.indexOf(query) >= 0) {
-                    data.push(item);
-                }
-            });
-            return data;
-        })
+        var queryString = "?q=" + query;
+        return this.http.get(endpoint + queryString)
+            .map(function (response) { return response.json(); })
             .catch(this.handleError);
+        // return this.http.get(endpoint)
+        //           .map(response=>{
+        //                  let data = []
+        //                  let req = response.json().filter(item=>{
+        //                                 if (item.name.indexOf(query) >=0) {
+        //                                      data.push(item)
+        //                                 }
+        //                             })
+        //                  return data
+        //            })
+        //           .catch(this.handleError)
     };
     VideoService.prototype.handleError = function (error, caught) {
         console.log(error, caught);
