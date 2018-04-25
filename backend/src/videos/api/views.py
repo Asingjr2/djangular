@@ -13,12 +13,13 @@ class VideoList(generics.ListAPIView):
     permission_classes = []
     authentication_classes = []
 
-    # Search return review using icontains method to see what contains query
+    # Created search method in model using compound queries with Q
     def get_queryset(self):
         query = self.request.GET.get("q")
-        qs = Video.objects.all()
         if query:
-            qs = qs.filter(name__icontains=query)
+            qs = Video.objects.search(query)
+        else:
+            qs = Video.objects.all()
         return qs
 
 
@@ -43,9 +44,9 @@ class VideoFeatured(generics.ListAPIView):
         query = self.request.GET.get("q")
         qs = all()
         if query:
-            qs = Video.objects.filter(name__icontains=query).filter(featured=True)
+            qs = Video.objects.featured().search(query)
         else:
-            qs = Video.objects.filter(featured=True)
+            qs = Video.objects.featured()
         return qs        
 
 
