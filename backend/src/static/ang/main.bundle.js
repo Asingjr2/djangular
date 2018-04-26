@@ -474,7 +474,7 @@ module.exports = "<form #searchForm='ngForm' class=\"navbar-form navbar-left\" (
 /***/ 198:
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div *ngIf='!video'>Loading</div>\r\n<div *ngIf='video'>\r\n    <h1>{{ video.name }}</h1>\r\n    <hr/>\r\n    <div style=\"position:relative;height:0;padding-bottom:56.25%\" *ngIf='video.embed'>\r\n        <iframe [src]=\"getEmbedUrl(video) | safe\" width=\"640\" height=\"360\" frameborder=\"0\" style=\"position:absolute;width:100%;height:100%;left:0\" allowfullscreen ></iframe>\r\n    </div>\r\n    <div class='text-center' *ngIf='video.image && !video.embed'>\r\n        <img class='img-responsive img-center' [src]='video.image' alt=\"{{ video.name }} image\" />\r\n    </div>\r\n\r\n</div>\r\n"
+module.exports = "\r\n<div *ngIf='errorStr'>No RESULTS MATCH YOUR SEARCH</div>\r\n<div *ngIf='!video && !errorStr'>Loading</div>\r\n<div *ngIf='video'>\r\n    <h1>{{ video.name }}</h1>\r\n    <hr/>\r\n    <div style=\"position:relative;height:0;padding-bottom:56.25%\" *ngIf='video.embed'>\r\n        <iframe [src]=\"getEmbedUrl(video) | safe\" width=\"640\" height=\"360\" frameborder=\"0\" style=\"position:absolute;width:100%;height:100%;left:0\" allowfullscreen ></iframe>\r\n    </div>\r\n    <div class='text-center' *ngIf='video.image && !video.embed'>\r\n        <img class='img-responsive img-center' [src]='video.image' alt=\"{{ video.name }} image\" />\r\n    </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -545,25 +545,13 @@ var VideoService = (function () {
         return this.http.get(endpoint + queryString)
             .map(function (response) { return response.json(); })
             .catch(this.handleError);
-        // return this.http.get(endpoint)
-        //           .map(response=>{
-        //                  let data = []
-        //                  let req = response.json().filter(item=>{
-        //                                 if (item.name.indexOf(query) >=0) {
-        //                                      data.push(item)
-        //                                 }
-        //                             })
-        //                  return data
-        //            })
-        //           .catch(this.handleError)
     };
     VideoService.prototype.handleError = function (error, caught) {
-        console.log(error, caught);
         if (error.status == 404) {
-            alert("Video Page not found");
+            alert("Search did not return any results!");
         }
         else {
-            alert("Something went wrong");
+            alert("Something went wrong.Please try again.");
         }
     };
     return VideoService;
@@ -683,9 +671,6 @@ var SearchDetailComponent = (function () {
             _this.query = params['q'];
             _this.req = _this._video.search(_this.query).subscribe(function (data) {
                 _this.videoList = data;
-            }, function (error) {
-                console.log(error);
-                _this.router.navigate(['/videos']);
             });
         });
     };
@@ -748,6 +733,7 @@ var VideoDetailComponent = (function () {
                 _this.video = data;
             }, function (error) {
                 console.log(error);
+                _this.errorStr = error;
                 _this.router.navigate(['/videos']);
             });
         });
@@ -822,7 +808,6 @@ VideoListComponent = __decorate([
 ], VideoListComponent);
 
 var _a;
-// ng g component youComponentName
 //# sourceMappingURL=video-list.component.js.map
 
 /***/ })
