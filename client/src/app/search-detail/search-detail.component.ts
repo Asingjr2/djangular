@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { VideoItem } from '../videos/video';
 import { VideoService } from '../videos/videos.service';
@@ -16,9 +16,9 @@ export class SearchDetailComponent implements OnInit, OnDestroy {
    query: string;
    videoList: [VideoItem];
 
-   
 
-  constructor(private route: ActivatedRoute, private _video:VideoService) { }
+
+  constructor(private route: ActivatedRoute, private router: Router, private _video:VideoService) { }
 
   ngOnInit() {
       this.routeSub = this.route.params.subscribe(params=>{
@@ -38,5 +38,5 @@ export class SearchDetailComponent implements OnInit, OnDestroy {
     return 'https://www.youtube.com/embed/' + item.embed + '?ecver=2'
   }
 
-  
+
 }

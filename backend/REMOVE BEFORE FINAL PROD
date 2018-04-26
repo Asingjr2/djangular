@@ -1,6 +1,0 @@
-ng build --env=prod --output-path C:\Users\Arthur\Desktop\djangular\backend\src\static\ang --watch
-
-
-
-************************
-GO BACK TO HTTP ERROR HANDLING WITH SEARCH RESULTS OR BAD HTTP PROMISES

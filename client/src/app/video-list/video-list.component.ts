@@ -32,4 +32,3 @@ export class VideoListComponent implements OnInit, OnDestroy {
 
 }
 
-// ng g component youComponentName

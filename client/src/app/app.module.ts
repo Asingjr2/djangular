@@ -16,6 +16,7 @@ import { SearchComponent } from './search/search.component';
 import { SearchDetailComponent } from './search-detail/search-detail.component';
 import { VideoListComponent } from './video-list/video-list.component';
 import { VideoDetailComponent } from './video-detail/video-detail.component';
+import { NotFoundComponent } from "./not-found/not-found.component";
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { VideoDetailComponent } from './video-detail/video-detail.component';
     SafePipe,
     HomeComponent,
     SearchComponent,
-    SearchDetailComponent
+    SearchDetailComponent,
+    NotFoundComponent
   ],
   imports: [
     // ngx-bootstrap
