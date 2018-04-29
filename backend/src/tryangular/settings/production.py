@@ -13,7 +13,7 @@ SECRET_KEY = 'frg!)8_xm#!^*rfh08utp4jg^#yih(g@-4zjsoz($wl$8xv8#m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["trydjangular2.herokuapp.com", ".herokuapp.com"]
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'asingr2@gmail.com' 
